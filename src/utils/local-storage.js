@@ -7,5 +7,17 @@ export const getStoreValue = (key) => {
 };
 
 export const setStoreValue = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
+  if (value === null) {
+    localStorage.removeItem(key);
+  } else {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
+
+export const removeStoreValue = (key) => {
+  const value = getStoreValue(key);
+
+  if (value === null) return;
+
+  localStorage.removeItem(key);
 };

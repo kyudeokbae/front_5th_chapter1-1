@@ -4,15 +4,16 @@ import { getStoreValue } from "./utils/local-storage";
 const App = () => {
   const path = window.location.pathname;
 
-  if (path === "/") {
-    return MainPage();
-  } else if (path === "/profile") {
-    return getStoreValue("isLoggedIn") ? ProfilePage() : LoginPage();
-  } else if (path === "/login") {
-    return LoginPage();
+  switch (path) {
+    case "/":
+      return MainPage();
+    case "/profile":
+      return getStoreValue("isLoggedIn") ? ProfilePage() : LoginPage();
+    case "/login":
+      return LoginPage();
+    default:
+      return ErrorPage();
   }
-
-  return ErrorPage();
 };
 
 const root = document.getElementById("root");
