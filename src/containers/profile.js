@@ -1,4 +1,5 @@
 import { Footer, Header } from "../components";
+import { getStoreValue, setStoreValue } from "../utils/local-storage";
 
 export const ProfilePage = () => /*html*/ `
   <div id="root">
@@ -11,7 +12,7 @@ export const ProfilePage = () => /*html*/ `
             <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
               내 프로필
             </h2>
-            <form>
+            <form id="profile-form">
               <div class="mb-4">
                 <label
                   for="username"
@@ -22,7 +23,7 @@ export const ProfilePage = () => /*html*/ `
                   type="text"
                   id="username"
                   name="username"
-                  value="홍길동"
+                  value="${getStoreValue("user")?.username ?? ""}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -36,7 +37,7 @@ export const ProfilePage = () => /*html*/ `
                   type="email"
                   id="email"
                   name="email"
-                  value="hong@example.com"
+                  value="${getStoreValue("user")?.email ?? ""}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -51,9 +52,7 @@ export const ProfilePage = () => /*html*/ `
                   name="bio"
                   rows="4"
                   class="w-full p-2 border rounded"
-                >
-안녕하세요, 항해플러스에서 열심히 공부하고 있는 홍길동입니다.</textarea
-                >
+                >${getStoreValue("user")?.bio ?? ""}</textarea>
               </div>
               <button
                 type="submit"
@@ -70,3 +69,22 @@ export const ProfilePage = () => /*html*/ `
     </div>
   </div>
 `;
+
+window.addEventListener("submit", (e) => {
+  if (e.target.id !== "profile-form") return;
+
+  e.preventDefault();
+
+  const prevUser = getStoreValue("user");
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
+  const bio = document.getElementById("bio").value;
+  const isChanged =
+    prevUser.username !== username?.trim() ||
+    prevUser.email !== email?.trim() ||
+    prevUser.bio !== bio?.trim();
+
+  if (isChanged) {
+    setStoreValue("user", { username, email, bio });
+  }
+});

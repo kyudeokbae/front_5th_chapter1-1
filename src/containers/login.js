@@ -25,6 +25,8 @@ export const LoginPage = () => /*html*/ `
 `;
 
 window.addEventListener("submit", (e) => {
+  if (e.target.id !== "login-form") return;
+
   e.preventDefault();
 
   const username = document.getElementById("username").value;
