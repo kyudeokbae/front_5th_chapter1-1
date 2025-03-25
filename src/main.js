@@ -1,15 +1,16 @@
 import { ErrorPage, MainPage, ProfilePage, LoginPage } from "./containers";
+import { ROUTE } from "./shared/route";
 import { getStoreValue } from "./utils/local-storage";
 
 const App = () => {
   const path = window.location.pathname;
 
   switch (path) {
-    case "/":
+    case ROUTE.main:
       return MainPage();
-    case "/profile":
+    case ROUTE.profile:
       return getStoreValue("isLoggedIn") ? ProfilePage() : LoginPage();
-    case "/login":
+    case ROUTE.login:
       return LoginPage();
     default:
       return ErrorPage();

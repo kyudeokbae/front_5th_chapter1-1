@@ -1,4 +1,15 @@
-import { removeStoreValue } from "../utils/local-storage";
+import { ROUTE } from "../shared/route";
+import { getStoreValue, removeStoreValue } from "../utils/local-storage";
+
+const getHeaderColor = (path) => {
+  return window.location.pathname === path ? "text-blue-600" : "text-gray-600";
+};
+
+const renderLogoutButton = () => {
+  return getStoreValue("isLoggedIn")
+    ? `<li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>`
+    : "";
+};
 
 export const Header = () => /*html*/ `
   <header class="bg-blue-600 text-white p-4 sticky top-0">
@@ -7,9 +18,9 @@ export const Header = () => /*html*/ `
 
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
-      <li><a href="/" class="text-blue-600">홈</a></li>
-      <li><a href="/profile" class="text-gray-600">프로필</a></li>
-      <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>
+      <li><a href="${ROUTE.main}" class="${getHeaderColor(ROUTE.main)}">홈</a></li>
+      <li><a href="${ROUTE.profile}" class="${getHeaderColor(ROUTE.profile)}">프로필</a></li>
+      ${renderLogoutButton()}
     </ul>
   </nav>
 `;
@@ -32,8 +43,8 @@ window.addEventListener("click", (e) => {
     removeStoreValue("password");
     removeStoreValue("isLoggedIn");
 
-    if (window.location.pathname !== "/") {
-      window.history.pushState({}, "", "/");
+    if (window.location.pathname !== ROUTE.main) {
+      window.history.pushState({}, "", ROUTE.main);
       window.dispatchEvent(new Event("popstate"));
     }
   }

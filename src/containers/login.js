@@ -1,3 +1,4 @@
+import { ROUTE } from "../shared/route";
 import { setStoreValue } from "../utils/local-storage";
 
 export const LoginPage = () => /*html*/ `
@@ -36,6 +37,6 @@ window.addEventListener("submit", (e) => {
   setStoreValue("password", password);
   setStoreValue("isLoggedIn", true);
 
-  window.history.pushState({}, "", "/profile");
+  window.history.pushState({}, "", ROUTE.profile);
   window.dispatchEvent(new Event("popstate"));
 });
