@@ -1,14 +1,19 @@
 import { ROUTE } from "../shared/route";
 import { getStoreValue, removeStoreValue } from "../utils/local-storage";
 
-const getHeaderColor = (path) => {
-  return window.location.pathname === path ? "text-blue-600" : "text-gray-600";
+const getHeaderClassName = (path) => {
+  return window.location.pathname === path
+    ? "text-blue-600 font-bold"
+    : "text-gray-600";
 };
 
-const renderLogoutButton = () => {
+const renderNavList = () => {
   return getStoreValue("isLoggedIn")
-    ? `<li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>`
-    : "";
+    ? `
+        <li><a href="${ROUTE.profile}" class="${getHeaderClassName(ROUTE.profile)}">프로필</a></li>
+        <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>
+      `
+    : `<li><a href="${ROUTE.login}" class="text-gray-600">로그인</a></li>`;
 };
 
 export const Header = () => /*html*/ `
@@ -18,9 +23,8 @@ export const Header = () => /*html*/ `
 
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
-      <li><a href="${ROUTE.main}" class="${getHeaderColor(ROUTE.main)}">홈</a></li>
-      <li><a href="${ROUTE.profile}" class="${getHeaderColor(ROUTE.profile)}">프로필</a></li>
-      ${renderLogoutButton()}
+      <li><a href="${ROUTE.main}" class="${getHeaderClassName(ROUTE.main)}">홈</a></li>
+      ${renderNavList()}
     </ul>
   </nav>
 `;
@@ -43,9 +47,7 @@ window.addEventListener("click", (e) => {
     removeStoreValue("password");
     removeStoreValue("isLoggedIn");
 
-    if (window.location.pathname !== ROUTE.main) {
-      window.history.pushState({}, "", ROUTE.main);
-      window.dispatchEvent(new Event("popstate"));
-    }
+    window.history.pushState({}, "", ROUTE.main);
+    window.dispatchEvent(new Event("popstate"));
   }
 });
