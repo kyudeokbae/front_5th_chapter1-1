@@ -1,8 +1,11 @@
+import { getPath } from "../router";
 import { ROUTE } from "../shared/route";
 import { getStoreValue, removeStoreValue } from "../utils/local-storage";
 
-const getHeaderClassName = (path) => {
-  return window.location.pathname === path
+const getHeaderClassName = (targetPath) => {
+  const currentPath = getPath();
+
+  return currentPath === targetPath
     ? "text-blue-600 font-bold"
     : "text-gray-600";
 };

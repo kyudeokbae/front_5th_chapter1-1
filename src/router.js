@@ -21,7 +21,7 @@ const routes = {
   [ROUTE.error]: () => ErrorPage(),
 };
 
-const getPath = () => {
+export const getPath = () => {
   const path = window.location.pathname;
   const hashPath = window.location.hash?.slice(1);
 
