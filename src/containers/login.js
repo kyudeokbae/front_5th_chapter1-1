@@ -33,6 +33,11 @@ window.addEventListener("submit", (e) => {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
+  if (!username.trim()) {
+    alert("사용자 이름을 입력해주세요.");
+    return;
+  }
+
   setStoreValue("user", { username, email: "", bio: "" });
   setStoreValue("password", password);
   setStoreValue("isLoggedIn", true);
