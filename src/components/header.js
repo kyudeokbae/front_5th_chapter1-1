@@ -47,7 +47,7 @@ window.addEventListener("click", (e) => {
     removeStoreValue("password");
     removeStoreValue("isLoggedIn");
 
-    window.history.pushState({}, "", ROUTE.main);
+    window.history.pushState({}, "", ROUTE.login);
     window.dispatchEvent(new Event("popstate"));
   }
 });
