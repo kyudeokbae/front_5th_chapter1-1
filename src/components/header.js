@@ -1,6 +1,7 @@
 import { getPath } from "../router";
 import { ROUTE } from "../shared/route";
-import { getStoreValue, removeStoreValue } from "../utils/local-storage";
+import { removeStoreValue } from "../utils/local-storage";
+import { store } from "../shared/store";
 
 const getHeaderClassName = (targetPath) => {
   const currentPath = getPath();
@@ -11,7 +12,7 @@ const getHeaderClassName = (targetPath) => {
 };
 
 const renderNavList = () => {
-  return getStoreValue("isLoggedIn")
+  return store.getState("isLoggedIn")
     ? `
         <li><a href="${ROUTE.profile}" class="${getHeaderClassName(ROUTE.profile)}">프로필</a></li>
         <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>

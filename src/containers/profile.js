@@ -1,5 +1,5 @@
 import { Footer, Header } from "../components";
-import { getStoreValue, setStoreValue } from "../utils/local-storage";
+import { store } from "../shared/store";
 
 export const ProfilePage = () => /*html*/ `
   <div id="root">
@@ -23,7 +23,7 @@ export const ProfilePage = () => /*html*/ `
                   type="text"
                   id="username"
                   name="username"
-                  value="${getStoreValue("user")?.username ?? ""}"
+                  value="${store.getState("user")?.username ?? ""}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -37,7 +37,7 @@ export const ProfilePage = () => /*html*/ `
                   type="email"
                   id="email"
                   name="email"
-                  value="${getStoreValue("user")?.email ?? ""}"
+                  value="${store.getState("user")?.email ?? ""}"
                   class="w-full p-2 border rounded"
                 />
               </div>
@@ -52,7 +52,7 @@ export const ProfilePage = () => /*html*/ `
                   name="bio"
                   rows="4"
                   class="w-full p-2 border rounded"
-                >${getStoreValue("user")?.bio ?? ""}</textarea>
+                >${store.getState("user")?.bio ?? ""}</textarea>
               </div>
               <button
                 type="submit"
@@ -75,7 +75,7 @@ window.addEventListener("submit", (e) => {
 
   e.preventDefault();
 
-  const prevUser = getStoreValue("user");
+  const prevUser = store.getState("user");
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const bio = document.getElementById("bio").value;
@@ -85,6 +85,6 @@ window.addEventListener("submit", (e) => {
     prevUser.bio !== bio?.trim();
 
   if (isChanged) {
-    setStoreValue("user", { username, email, bio });
+    store.setState("user", { username, email, bio });
   }
 });

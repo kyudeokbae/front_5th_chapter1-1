@@ -1,18 +1,18 @@
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "./containers";
 import { ROUTE } from "./shared/route";
-import { getStoreValue } from "./utils/local-storage";
+import { store } from "./shared/store";
 
 const routes = {
   [ROUTE.main]: () => MainPage(),
   [ROUTE.login]: () => {
-    if (getStoreValue("isLoggedIn")) {
+    if (store.getState("isLoggedIn")) {
       window.history.pushState({}, "", ROUTE.main);
       return MainPage();
     }
     return LoginPage();
   },
   [ROUTE.profile]: () => {
-    if (!getStoreValue("isLoggedIn")) {
+    if (!store.getState("isLoggedIn")) {
       window.history.pushState({}, "", ROUTE.login);
       return LoginPage();
     }
