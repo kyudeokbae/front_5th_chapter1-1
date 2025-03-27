@@ -1,4 +1,4 @@
-import { getPath } from "../router";
+import { getPath, pushState } from "../router";
 import { ROUTE } from "../shared/route";
 import { removeStoreValue } from "../utils/local-storage";
 import { store } from "../shared/store";
@@ -15,7 +15,7 @@ const renderNavList = () => {
   return store.getState("isLoggedIn")
     ? `
         <li><a href="${ROUTE.profile}" class="${getHeaderClassName(ROUTE.profile)}">프로필</a></li>
-        <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>
+        <li><a id="logout" href="${ROUTE.login}" class="text-gray-600">로그아웃</a></li>
       `
     : `<li><a href="${ROUTE.login}" class="text-gray-600">로그인</a></li>`;
 };
@@ -38,9 +38,7 @@ window.addEventListener("click", (e) => {
 
   const href = e.target.getAttribute("href");
   const isLogoutButton = e.target.id === "logout";
-  const isSamePage = !isLogoutButton && href === window.location.pathname;
-
-  if (!isSamePage && !isLogoutButton) return;
+  const isSamePage = href === getPath();
 
   e.preventDefault();
 
@@ -50,8 +48,8 @@ window.addEventListener("click", (e) => {
     removeStoreValue("user");
     removeStoreValue("password");
     removeStoreValue("isLoggedIn");
-
-    window.history.pushState({}, "", ROUTE.login);
-    window.dispatchEvent(new Event("popstate"));
   }
+
+  pushState(e.target.pathname);
+  window.dispatchEvent(new Event("popstate"));
 });

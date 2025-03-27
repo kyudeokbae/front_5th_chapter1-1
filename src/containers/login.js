@@ -1,3 +1,4 @@
+import { pushState } from "../router";
 import { ROUTE } from "../shared/route";
 import { store } from "../shared/store";
 
@@ -42,6 +43,6 @@ window.addEventListener("submit", (e) => {
   store.setState("password", password);
   store.setState("isLoggedIn", true);
 
-  window.history.pushState({}, "", ROUTE.profile);
+  pushState(ROUTE.main);
   window.dispatchEvent(new Event("popstate"));
 });
