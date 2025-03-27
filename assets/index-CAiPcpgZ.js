@@ -1,4 +1,4 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))o(r);new MutationObserver(r=>{for(const n of r)if(n.type==="childList")for(const c of n.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&o(c)}).observe(document,{childList:!0,subtree:!0});function s(r){const n={};return r.integrity&&(n.integrity=r.integrity),r.referrerPolicy&&(n.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?n.credentials="include":r.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function o(r){if(r.ep)return;r.ep=!0;const n=s(r);fetch(r.href,n)}})();const a={main:"/",profile:"/profile",login:"/login",error:"/error"},v=e=>{const t=localStorage.getItem(e);return t===null?null:JSON.parse(t)},S=(e,t)=>{t===null?localStorage.removeItem(e):localStorage.setItem(e,JSON.stringify(t))},i=e=>{v(e)!==null&&localStorage.removeItem(e)},f={isLoggedIn:!1,user:{username:"",email:"",bio:""}};class P{constructor(){this.state=f}syncState(t){this.state={...this.state,[t]:v(t)}}setState(t,s){S(t,s)}clearState(t){i(t)}getState(t){var s;return this.syncState(t),((s=this.state)==null?void 0:s[t])??f[t]}}const l=new P,w=e=>m()===e?"text-blue-600 font-bold":"text-gray-600",$=()=>l.getState("isLoggedIn")?`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))o(r);new MutationObserver(r=>{for(const n of r)if(n.type==="childList")for(const d of n.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&o(d)}).observe(document,{childList:!0,subtree:!0});function s(r){const n={};return r.integrity&&(n.integrity=r.integrity),r.referrerPolicy&&(n.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?n.credentials="include":r.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function o(r){if(r.ep)return;r.ep=!0;const n=s(r);fetch(r.href,n)}})();const a={main:"/",profile:"/profile",login:"/login",error:"/error"},v=e=>{const t=localStorage.getItem(e);return t===null?null:JSON.parse(t)},S=(e,t)=>{t===null?localStorage.removeItem(e):localStorage.setItem(e,JSON.stringify(t))},i=e=>{v(e)!==null&&localStorage.removeItem(e)},p={isLoggedIn:!1,user:{username:"",email:"",bio:""}};class P{constructor(){this.state=p}syncState(t){this.state={...this.state,[t]:v(t)}}setState(t,s){S(t,s)}clearState(t){i(t)}getState(t){var s;return this.syncState(t),((s=this.state)==null?void 0:s[t])??p[t]}}const l=new P,w=e=>m()===e?"text-blue-600 font-bold":"text-gray-600",L=()=>l.getState("isLoggedIn")?`
         <li><a href="${a.profile}" class="${w(a.profile)}">프로필</a></li>
         <li><a id="logout" href="${a.login}" class="text-gray-600">로그아웃</a></li>
       `:`<li><a href="${a.login}" class="text-gray-600">로그인</a></li>`,x=()=>`
@@ -9,14 +9,14 @@
   <nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
       <li><a href="${a.main}" class="${w(a.main)}">홈</a></li>
-      ${$()}
+      ${L()}
     </ul>
   </nav>
-`;window.addEventListener("click",e=>{if(!e.target.matches("a[href]"))return;const t=e.target.getAttribute("href"),s=e.target.id==="logout",o=t===m();e.preventDefault(),!o&&(s&&(i("user"),i("password"),i("isLoggedIn")),d(e.target.pathname),window.dispatchEvent(new Event("popstate")))});const y=()=>`
+`;window.addEventListener("click",e=>{if(!e.target.matches("a[href]"))return;const t=e.target.getAttribute("href"),s=e.target.id==="logout",o=t===m();e.preventDefault(),!o&&(s&&(i("user"),i("password"),i("isLoggedIn")),c(e.target.pathname),window.dispatchEvent(new Event("popstate")))});const y=()=>`
   <footer class="bg-gray-200 p-4 text-center">
     <p>&copy; 2024 항해플러스. All rights reserved.</p>
   </footer>
-`,E=({userName:e,createdAt:t,content:s})=>`
+`,$=({userName:e,createdAt:t,content:s})=>`
   <div class="bg-white rounded-lg shadow p-4">
     <div class="flex items-center mb-2">
       <img src="https://placehold.co/40" alt="프로필" class="rounded-full mr-2">
@@ -32,7 +32,7 @@
       <button>공유</button>
     </div>
   </div>
-`,L=[{userName:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{userName:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{userName:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{userName:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{userName:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],p=()=>`
+`,E=[{userName:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{userName:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{userName:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{userName:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{userName:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],f=()=>`
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
       ${x()}
@@ -44,7 +44,7 @@
         </div>
 
         <div class="space-y-4">
-          ${L.map(e=>E(e)).join("")}
+          ${E.map(e=>$(e)).join("")}
         </div>
       </main>
 
@@ -140,7 +140,7 @@
       </div>
     </div>
   </main>
-`;window.addEventListener("submit",e=>{if(e.target.id!=="login-form")return;e.preventDefault();const t=document.getElementById("username").value,s=document.getElementById("password").value;if(!t.trim()){alert("사용자 이름을 입력해주세요.");return}l.setState("user",{username:t,email:"",bio:""}),l.setState("password",s),l.setState("isLoggedIn",!0),d(a.main),window.dispatchEvent(new Event("popstate"))});const N=()=>`
+`;window.addEventListener("submit",e=>{if(e.target.id!=="login-form")return;e.preventDefault();const t=document.getElementById("username").value,s=document.getElementById("password").value;if(!t.trim()){alert("사용자 이름을 입력해주세요.");return}l.setState("user",{username:t,email:"",bio:""}),l.setState("password",s),l.setState("isLoggedIn",!0),c(a.main),window.dispatchEvent(new Event("popstate"))});const N=()=>`
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full text-center" style="max-width: 480px">
       <h1 class="text-2xl font-bold text-blue-600 mb-4">항해플러스</h1>
@@ -154,4 +154,4 @@
       </a>
     </div>
   </main>
-`,u="/front_5th_chapter1-1",h={[a.main]:()=>p(),[a.login]:()=>l.getState("isLoggedIn")?(d(a.main),p()):b(),[a.profile]:()=>l.getState("isLoggedIn")?I():(d(a.login),b()),[a.error]:()=>N()},m=()=>{var o;const e=window.location.pathname;return(((o=window.location.hash)==null?void 0:o.slice(1))||e).replace(u,"")},A=()=>{const e=m();return(h[e]||h[a.error])()},O=e=>{const t=window.location.hostname.includes("github.io"),s=e.replace(u,"");return t?`${u}${s}`:s},d=e=>{const t=O(e);window.history.pushState({},"",t)},g=()=>{const e=document.getElementById("root");e.innerHTML=A()};g();window.addEventListener("popstate",g);window.addEventListener("hashchange",g);
+`,u="/front_5th_chapter1-1",h={[a.main]:()=>f(),[a.login]:()=>l.getState("isLoggedIn")?(c(a.main),f()):b(),[a.profile]:()=>l.getState("isLoggedIn")?I():(c(a.login),b()),[a.error]:()=>N()},m=()=>{var o;const e=window.location.pathname;return(((o=window.location.hash)==null?void 0:o.slice(1))||e).replace(u,"")},A=()=>{const e=m();return(h[e]||h[a.error])()},O=e=>{const t=window.location.hostname.includes("github.io"),s=e.replace(u,"");return t?`${u}${s}`:s},c=e=>{const t=O(e);window.history.pushState({},"",t)},g=()=>{const e=document.getElementById("root"),s=new URLSearchParams(window.location.search).get("path");s&&history.replaceState(null,"",s),e.innerHTML=A()};g();window.addEventListener("popstate",g);window.addEventListener("hashchange",g);
