@@ -8,7 +8,7 @@
     <script>
       const path = window.location.pathname;
 
-      window.location.replace(`/?path=${path}`);
+      window.location.replace(`/?path=${encodeURIComponent(path)}`);
     </script>
 </body>
 </html>
