@@ -12,7 +12,7 @@
       ${E()}
     </ul>
   </nav>
-`;window.addEventListener("click",e=>{if(!e.target.matches("a[href]"))return;const t=e.target.getAttribute("href"),s=e.target.id==="logout",n=t===m();if(e.preventDefault(),n)return;s&&(i("user"),i("password"),i("isLoggedIn"));const r=e.target.pathname,o=window.location.hostname.includes("github.io");d(o?`/frontend_5th_chapter1-1${r}`:r),window.dispatchEvent(new Event("popstate"))});const y=()=>`
+`;window.addEventListener("click",e=>{if(!e.target.matches("a[href]"))return;const t=e.target.getAttribute("href"),s=e.target.id==="logout",n=t===m();if(e.preventDefault(),n)return;s&&(i("user"),i("password"),i("isLoggedIn"));const r=e.target.pathname,o=window.location.hostname.includes("github.io");d(o?`/front_5th_chapter1-1${r}`:r),window.dispatchEvent(new Event("popstate"))});const y=()=>`
   <footer class="bg-gray-200 p-4 text-center">
     <p>&copy; 2024 항해플러스. All rights reserved.</p>
   </footer>
